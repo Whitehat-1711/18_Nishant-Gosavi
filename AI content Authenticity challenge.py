@@ -13,4 +13,11 @@ print('total text: ',dataset['generated'].count())
 print('Human Written Texts: ',(dataset['generated']==0.0).sum())
 print('AI Generated Texts: ',(dataset['generated']==1.0).sum())
 
+dataset['text'][0]
+
+def remove_tags(text):
+    tags=['\n','\'']
+    for tag in tags:
+        text=text.replace(tag,'')
+
 
