@@ -45,4 +45,6 @@ else:
     print(f"The word '{word_to_check}' is spelled incorrectly.")
 
 
+dataset['text'][487232]
+
 
