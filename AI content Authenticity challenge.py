@@ -28,4 +28,15 @@ dataset['text']=dataset['text'].apply(remove_tags)
 
 dataset['text'][0]
 
+import nltk
+from nltk.corpus import words
+
+nltk.download('words')
+english_words = set(words.words())
+
+
+def is_spelled_correctly(word):
+    return word in english_words
+
+
 
