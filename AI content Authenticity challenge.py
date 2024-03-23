@@ -38,5 +38,11 @@ english_words = set(words.words())
 def is_spelled_correctly(word):
     return word in english_words
 
+word_to_check = dataset['text'][487232]
+if is_spelled_correctly(word_to_check):
+    print(f"The word '{word_to_check}' is spelled correctly.")
+else:
+    print(f"The word '{word_to_check}' is spelled incorrectly.")
+
 
 
