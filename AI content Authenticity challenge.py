@@ -43,4 +43,18 @@ else:
 
 dataset['text'][487232]
 
+from nltk.corpus import stopwords
+nltk.download('stopwords')
+
+def remove_stopwords(text):
+    stop_words = set(stopwords.words('english'))
+    words = nltk.word_tokenize(text)
+    filtered_words = [word for word in words if word.lower() not in stop_words]
+    filtered_words= ' '.join(filtered_words)
+    return filtered_words
+
+dataset['text']=dataset['text'].apply(remove_stopwords)
+
+dataset['text'][0]
+
 
