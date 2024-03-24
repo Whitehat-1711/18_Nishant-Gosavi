@@ -66,6 +66,17 @@ X_train, X_test, y_train, y_test = train_test_split(X,y,test_size=0.3,random_sta
 print(len(X_train))
 print(len(y_train))
 
+from sklearn.pipeline import Pipeline
+from sklearn.feature_extraction.text import CountVectorizer, TfidfTransformer
+from sklearn.naive_bayes import MultinomialNB
+from sklearn.metrics import classification_report
+
+pipeline = Pipeline([
+    ('count_vectorizer', CountVectorizer()),  # Convert text to token counts
+    ('tfidf_transformer', TfidfTransformer()),  # Transform token counts to TF-IDF
+    ('naive_bayes', MultinomialNB())  # Naive Bayes classifier for text classification
+])
+
 
 
 
