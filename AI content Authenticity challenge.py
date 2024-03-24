@@ -57,4 +57,15 @@ dataset['text']=dataset['text'].apply(remove_stopwords)
 
 dataset['text'][0]
 
+y=dataset['generated']
+X=dataset['text']
+
+from sklearn.model_selection import train_test_split
+X_train, X_test, y_train, y_test = train_test_split(X,y,test_size=0.3,random_state=42)
+
+print(len(X_train))
+print(len(y_train))
+
+
+
 
