@@ -77,6 +77,29 @@ pipeline = Pipeline([
     ('naive_bayes', MultinomialNB())  # Naive Bayes classifier for text classification
 ])
 
+y_pred= pipeline.predict(X_test)
+
+
+from sklearn.metrics import classification_report
+print(classification_report(y_test,y_pred))
+
+import nltk
+nltk.download('punkt')
+
+
+
+text_to_check = "good how are you .toady is hot sunny day."
+
+text_to_check_cleaned = remove_tags(remove_stopwords(text_to_check))
+
+
+prediction = pipeline.predict([text_to_check_cleaned])
+
+
+if prediction[0] == 1:
+    print("The text is AI-generated.")
+else:
+    print("The text is human-written.")
 
 
 
