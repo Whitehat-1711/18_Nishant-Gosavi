@@ -101,5 +101,39 @@ if prediction[0] == 1:
 else:
     print("The text is human-written.")
 
+prediction_history = []
 
+def add_to_prediction_history(text, prediction):
+    prediction_history.append({'text': text, 'prediction': prediction})
+
+add_to_prediction_history(text_to_check, prediction[0])
+print("Prediction History:")
+for item in prediction_history:
+    print(f"Text: {item['text']}, Prediction: {'AI-generated' if item['prediction'] == 1 else 'Human-written'}")
+
+def explain_prediction(text):
+    words =nltk. word_tokenize(text)
+    important_words = [word for word in words if word in pipeline.named_steps['count_vectorizer'].vocabulary_]
+    return important_words
+
+explanation = explain_prediction(text_to_check_cleaned)
+print("Explanation of Prediction:")
+print(" ".join(explanation))
+
+def feedback_loop():
+    feedback = input("Was the prediction correct? (yes/no): ")
+    if feedback.lower() == 'yes':
+        return  # No need to retrain if prediction was correct
+    elif feedback.lower() == 'no':
+        new_text = input("Please provide the correct label (AI-generated or human-written): ")
+        new_label = 1 if new_text.lower() == 'ai-generated' else 0
+        X_train_feedback = X_train.append(pd.Series(text_to_check_cleaned))
+        y_train_feedback = y_train.append(pd.Series([new_label]))
+        pipeline.fit(X_train_feedback, y_train_feedback)
+        print("Model retrained successfully.")
+    else:
+        print("Invalid input. Please enter 'yes' or 'no'.")
+        feedback_loop()
+
+feedback_loop()
 
